@@ -93,19 +93,21 @@ float32 float64
 complex64 complex128
 
 ```
-- Unlike in C, in Go assignment between items of different type requires an explicit conversion
+ > Unlike in C, in Go assignment between items of different type requires an explicit conversion
 
 - Type Inference
+  
   ```
-  i := 42           // int
-f := 3.142        // float64
-g := 0.867 + 0.5i // complex128
+    i := 42           // int
+    f  := 3.142        // float64
+    g := 0.867 + 0.5i // complex128
+  
   ```
 
 - Constants
-with keyword `const`
-`const Pi = 3.14`
-Constants cannot be declared using the := syntax
+  
+> with keyword `const` `const Pi = 3.14`
+> Constants cannot be declared using the := syntax
 
 - Numeric Constants
 
@@ -130,3 +132,127 @@ func main() {
 	fmt.Println(needFloat(Big))
 }
 ```
+
+- For loop
+
+> Go has only one looping construct, the for loop.
+
+> The basic for loop has three components separated by semicolons:
+
+> the init statement: executed before the first iteration
+> the condition expression: evaluated before every iteration
+> the post statement: executed at the end of every iteration
+> The init statement will often be a short variable declaration, and > the variables declared there are visible only in the scope of the for statement.
+
+> The loop will stop iterating once the boolean condition evaluates to false.
+
+> Note: Unlike other languages like C, Java, or JavaScript there are no parentheses surrounding the three components of the for statement and the braces { } are always required.
+
+```
+package main
+
+import "fmt"
+
+func main() {
+	sum := 0
+	for i := 0; i < 10; i++ {
+		sum += i
+		fmt.Println(sum)
+	}
+	fmt.Println(sum)
+}
+
+```
+
+- For continued and For is Go's while
+> The init and post statements are optional.
+> At that point you can drop the semicolons: C's while is spelled for in Go.
+```
+
+func main() {
+	sum := 1
+	for sum < 1000 {
+		sum += sum
+	}
+	fmt.Println(sum)
+}
+```
+- Forever
+  > If you omit the loop condition it loops forever, so an infinite loop is compactly expressed.
+  `for{}`
+
+- If and else
+  > Go's if statements are like its for loops; the expression need not be surrounded by parentheses ( ) but the braces { } are required.
+
+  ```
+  // Variables declared by the statement are only in scope until the end of the if 
+
+  // Variables declared inside an if short statement are also available inside any of the else blocks.
+  if v:= math.sqrt(r); v> n{ 
+    return v
+  }else{
+    fmt.Println(v)
+  }
+  fmt.Println(v) // can't accesss this here
+  ```
+
+  - Newton's Method
+
+
+- Switch
+> break; statement is not needed in Go, Another important difference is that Go's switch cases need not be constants, and the values involved need not be integers.
+```
+func main() {
+fmt.Print("Go runs on ")
+switch os := runtime.GOOS; os {
+case "darwin":
+    fmt.Println("OS X.")
+case "linux":
+    fmt.Println("Linux.")
+default:
+    // freebsd, openbsd,
+    // plan9, windows...
+    fmt.Printf("%s.\n", os)
+}
+}
+
+```
+
+
+- Switch Evaluation Order
+> Using javascript on switch cases is awesome, Switch without a condition is the same as switch true.
+```
+func main() {
+	fmt.Println("When's Saturday?")
+	today := time.Now().Weekday()
+	switch time.Saturday {
+	case today + 0:
+		fmt.Println("Today.")
+	case today + 1:
+		fmt.Println("Tomorrow.")
+	case today + 4:
+		fmt.Println("In two days.")
+	default:
+		fmt.Println("Too far away.")
+	}
+}
+
+func main() {
+	t := time.Now()
+	switch {
+	case t.Hour() < 12:
+		fmt.Println("Good morning!")
+	case t.Hour() < 17:
+		fmt.Println("Good afternoon.")
+	default:
+		fmt.Println("Good evening.")
+	}
+}
+
+```
+
+- Defer
+> A defer statement defers the execution of a function until the surrounding function returns.
+
+- Stacked Defers
+> A defer statement defers the execution of a function until the surrounding function returns.
